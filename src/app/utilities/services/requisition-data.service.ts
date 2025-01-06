@@ -49,7 +49,7 @@ class RequisitionDataService {
 
   private fetch(): void
   {
-    this._httpClient.get<Array<IRequisition>>('/requisitions.json')
+    this._httpClient.get<Array<IRequisition>>('/pathology-testing-assessment/requisitions.json')
       .subscribe({
         next: (data) => {
           const newData = new Map<string, IRequisition>(

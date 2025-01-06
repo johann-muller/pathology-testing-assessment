@@ -26,7 +26,7 @@ class TestTypeService {
   }
 
   private fetchData(): void {
-    this._httpClient.get<Array<ITestType>>('/test-types.json')
+    this._httpClient.get<Array<ITestType>>('/pathology-testing-assessment/test-types.json')
       .subscribe({
         next: (data) => {
           this._testTypeData = data.filter((value) => value.isActive);
