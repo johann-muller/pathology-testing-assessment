@@ -1,0 +1,20 @@
+@use '@angular/material' as mat;
+@include mat.core();
+
+html, body { height: 100%; }
+body { height: 100%; margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+mat-card {
+  display: grid;
+  place-items: center;
+  width: 100%;
+}
+
+mat-card-content {
+  width: 100%;
+  max-width: 1200px;
+}
+
+mat-card-title {
+  padding: 15px;
+}

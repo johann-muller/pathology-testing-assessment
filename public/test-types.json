@@ -1,0 +1,38 @@
+[
+  {
+    "testId": 1,
+    "mnemonic": "Na",
+    "description": "Sodium",
+    "isActive": true
+  },
+  {
+    "testId": 2,
+    "mnemonic": "K",
+    "description": "Potassium",
+    "isActive": true
+  },
+  {
+    "testId": 3,
+    "mnemonic": "Cr",
+    "description": "Creatinine",
+    "isActive": true
+  },
+  {
+    "testId": 4,
+    "mnemonic": "Ucr",
+    "description": "Urine-Creatinine",
+    "isActive": false
+  },
+  {
+    "testId": 5,
+    "mnemonic": "Ur",
+    "description": "Urea",
+    "isActive": true
+  },
+  {
+    "testId": 6,
+    "mnemonic": "UCE",
+    "description": "Urea+Createnine+Electrolytes",
+    "isActive": true
+  }
+]

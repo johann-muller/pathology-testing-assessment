@@ -1,0 +1,140 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Create Requisition Form</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="requisitionForm" (ngSubmit)="onSubmit()">
+      <!-- Requisition ID -->
+      <mat-form-field class="requisition-id">
+        <mat-label>Requisition ID</mat-label>
+        <input matInput id="requisitionId" formControlName="requisitionId" type="text" />
+        @if (requisitionForm.controls.requisitionId.touched && requisitionForm.controls.requisitionId.invalid) {
+          <mat-error>
+            @if (requisitionForm.controls.requisitionId.errors?.['required']) {
+              <small>Requisition ID is required.</small>
+            }
+            @if (requisitionForm.controls.requisitionId.errors?.['pattern']) {
+              <small>Enter a valid 4-digit ID.</small>
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Time Sample Taken -->
+      <mat-form-field class="time-sample-taken">
+        <mat-label>Time Sample Taken</mat-label>
+        <input matInput id="timeSampleTaken" formControlName="timeSampleTaken" type="datetime-local" />
+        @if (requisitionForm.controls.timeSampleTaken.touched && requisitionForm.controls.timeSampleTaken.invalid) {
+          <mat-error>
+            @if (requisitionForm.controls.timeSampleTaken.errors?.['required']) {
+              <small>Time Sample Taken is required.</small>
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- First Name -->
+      <mat-form-field class="first-name">
+        <mat-label>First Name</mat-label>
+        <input matInput id="firstName" autocomplete="off" formControlName="firstName" type="text" />
+        @if (requisitionForm.controls.firstName.touched && requisitionForm.controls.firstName.invalid) {
+          <mat-error>
+            @if (requisitionForm.controls.firstName.errors?.['required']) {
+              <small>First Name is required.</small>
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Surname -->
+      <mat-form-field class="surname">
+        <mat-label>Surname</mat-label>
+        <input matInput id="surname" autocomplete="off" formControlName="surname" type="text" />
+        @if (requisitionForm.controls.surname.touched && requisitionForm.controls.surname.invalid) {
+          <mat-error>
+            @if (requisitionForm.controls.surname.errors?.['required']) {
+              <small>Surname is required.</small>
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Gender -->
+      <mat-form-field class="gender">
+        <mat-label>Gender</mat-label>
+        <mat-select matInput id="gender" formControlName="gender">
+          <mat-option value="M">Male</mat-option>
+          <mat-option value="F">Female</mat-option>
+          <mat-option value="U">Unspecified</mat-option>
+        </mat-select>
+        @if (requisitionForm.controls.gender.touched && requisitionForm.controls.gender.invalid) {
+          <mat-error>
+            @if (requisitionForm.controls.gender.errors?.['required']) {
+              <small>Gender is required.</small>
+            }
+            @if (requisitionForm.controls.gender.errors?.['pattern']) {
+              <small>Select a valid gender.</small>
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Date of Birth -->
+      <mat-form-field class="date-of-birth">
+        <mat-label>Date of Birth</mat-label>
+        <input matInput id="dateOfBirth" autocomplete="off" formControlName="dateOfBirth" type="date" />
+        @if (requisitionForm.controls.dateOfBirth.touched && requisitionForm.controls.dateOfBirth.invalid) {
+          <mat-error>
+            @if (requisitionForm.controls.dateOfBirth.errors?.['required']) {
+              <small>Date of Birth is required.</small>
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Age -->
+      <mat-form-field class="age">
+        <mat-label>Age</mat-label>
+        <input matInput id="age" autocomplete="off" formControlName="age" type="number"/>
+      </mat-form-field>
+
+      <!-- Mobile Number -->
+      <mat-form-field class="mobile-number">
+        <mat-label>Mobile Number</mat-label>
+        <input matInput id="mobileNumber" autocomplete="off" formControlName="mobileNumber" type="tel" />
+        @if (requisitionForm.controls.mobileNumber.touched && requisitionForm.controls.mobileNumber.invalid) {
+          <mat-error>
+            @if (requisitionForm.controls.mobileNumber.errors?.['required']) {
+              <small>Mobile Number is required.</small>
+            }
+            @if (requisitionForm.controls.mobileNumber.errors?.['pattern']) {
+              <small>Enter a valid mobile number (e.g., +27xxxxxxxxx).</small>
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Requested Tests -->
+      <mat-form-field class="requested-tests">
+        <mat-label>Requested Tests</mat-label>
+        <mat-select multiple matInput id="requestedTests" formControlName="requestedTests">
+        @for (test of testTypes; track test) {
+          <mat-option [value]="test.mnemonic">{{test.mnemonic}} - {{test.description}}</mat-option>
+        }
+        </mat-select>
+        @if (requisitionForm.controls.requestedTests.touched && requisitionForm.controls.requestedTests.invalid) {
+          <mat-error>
+            @if (requisitionForm.controls.requestedTests.errors?.['required']) {
+              <small>Requested Tests are required.</small>
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Submit Button -->
+      <div class="submit">
+        <button mat-raised-button color="accent" type="submit" [disabled]="requisitionForm.invalid">Submit</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

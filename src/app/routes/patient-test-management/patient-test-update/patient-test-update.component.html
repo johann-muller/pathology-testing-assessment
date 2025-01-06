@@ -1,0 +1,79 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Enter Test Results</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-divider class="divider"/>
+    <div class="data-container">
+      <div class="label">
+        <p>Requisition Id</p>
+        <p>Time Sample Taken</p>
+        <p>First Name</p>
+        <p>Surname</p>
+        <p>Gender</p>
+        <p>Date of Birth</p>
+        <p>Age</p>
+        <p>Mobile Number</p>
+      </div>
+      <div class="value">
+        <p>{{model.requisitionId}}</p>
+        <p>{{model.timeSampleTaken}}</p>
+        <p>{{model.firstName}}</p>
+        <p>{{model.surname}}</p>
+        <p>{{model.gender}}</p>
+        <p>{{model.dateOfBirth}}</p>
+        <p>{{model.age}}</p>
+        <p>{{model.mobileNumber}}</p>
+      </div>
+    </div>
+    <mat-divider class="divider"/>
+    @for(test of finalizedRequistionTest; track test) {
+      <div class="test-container">
+        <div class="test-id">Test Id: {{test.testId}}</div>
+        <div class="result">Result: {{test.result | notApplicablePipe}}</div>
+        <div class="comment">Comment: {{test.comment | notApplicablePipe}}</div>
+      </div>
+    }
+    <mat-divider class="divider"/>
+    <div [formGroup]="requestedTestsForm">
+      <div formArrayName="requestedTests">
+        @for (testRequest of requestedTestsForm.controls.requestedTests.controls; track testRequest; let i = $index) {
+          <form [formGroupName]="i" [formGroup]="testRequest" (ngSubmit)="onSubmit(testRequest)">
+            <!-- Description -->
+            <div class="description">
+              <mat-chip>{{testRequest.controls.description.value}}</mat-chip>
+            </div>
+
+            <!-- Result -->
+            <mat-form-field class="result">
+              <mat-label>Result</mat-label>
+              <input matInput id="result" formControlName="result" type="text" />
+              @if (testRequest.controls.result.touched && testRequest.controls.result.invalid) {
+                <mat-error>
+                  @if (testRequest.controls.result.errors?.['required']) {
+                    <small>Result is required.</small>
+                  }
+                </mat-error>
+              }
+            </mat-form-field>
+
+            <!-- Comment -->
+            <mat-form-field class="comment">
+              <mat-label>Comment</mat-label>
+              <input matInput id="comment" autocomplete="off" formControlName="comment" type="text" />
+            </mat-form-field>
+
+            <!-- Submit Button -->
+            <div class="submit">
+              <button mat-raised-button color="primary" type="submit" [disabled]="testRequest.invalid">Submit</button>
+            </div>
+          </form>
+        }
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="downloadJson()">JSON</button>
+    <!-- <button mat-raised-button color="accent" (click)="downloadText()">Text File</button> -->
+  </mat-card-actions>
+</mat-card>
